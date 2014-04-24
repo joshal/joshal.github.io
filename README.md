@@ -1,4 +1,4 @@
 datasciencecoursera
 ===================
 
-Repository Coursera data science courses
+Repository for Coursera data science courses

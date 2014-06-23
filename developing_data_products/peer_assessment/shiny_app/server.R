@@ -11,9 +11,11 @@ fit <- lm(mpg ~ wt, data=mtcars)
 shinyServer(
     function(input, output) {
         output$myScatter <- renderPlot({
+            # Plot the data
             plot(mpg ~ weight, pch = 21, col = "black", bg = "lightblue",
                  cex = 1.5, main='Predicting MPG by car weight')
             car_weight <- input$car_weight
+            # Compute predicted mpg
             predicted_mpg <- beta0 + beta1 * car_weight
             points(car_weight, predicted_mpg, cex = 2.5, pch = 19)
             # Draw X and Y axis lines for the predicted values
@@ -23,6 +25,7 @@ shinyServer(
             round_predicted_mpg <- round(predicted_mpg, 2)
             text(4.5, 32, paste("weight = ", car_weight*1000, " lb"))
             text(4.5, 31, paste("mpg = ", round_predicted_mpg))
+            # Draw the red line showing the fit
             abline(beta0, beta1, lwd = 3, col = "red")
             output$predicted_mpg <- renderText({round_predicted_mpg})
         }) 
